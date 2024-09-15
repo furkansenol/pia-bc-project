@@ -1,0 +1,51 @@
+services:
+  api_gateway:
+    build: ./api_gateway
+    image: api-gateway:latest
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  users-backend:
+    build: ./users
+    image: users-backend:latest
+    env_file:
+      - .env
+    depends_on:
+      - mongo-users
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  consumer:
+    build: ./consumer
+    image: consumer:latest
+    env_file:
+      - .env
+    depends_on:
+      - mongo-accounts
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  mongo-users:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  mongo-accounts:
+    image: mongo:5.0
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

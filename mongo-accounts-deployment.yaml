@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-accounts-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-accounts
+  template:
+    metadata:
+      labels:
+        app: mongo-accounts
+    spec:
+      containers:
+        - name: mongo-accounts
+          image: mongo:5.0
+          ports:
+            - containerPort: 27017

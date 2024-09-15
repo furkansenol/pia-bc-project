@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-backend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: users-backend
+  template:
+    metadata:
+      labels:
+        app: users-backend
+    spec:
+      containers:
+        - name: users-backend
+          image: users-backend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5001
+          envFrom:
+            - configMapRef:
+                name: env-config
