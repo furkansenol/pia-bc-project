@@ -15,3 +15,5 @@ For example you can send a POST request to `http://localhost:5000/` with body:
 }
 ```
 Then you can send a GET request with a query parameter like: `http://localhost:5000?user_id=66e745b7d49bb0f8ae7f41f3`
+
+You can see the Postman collection used for testing in `testing/pia-bc.postman_collection.json`
